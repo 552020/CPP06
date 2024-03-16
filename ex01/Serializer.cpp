@@ -1,8 +1,9 @@
 #include "Serializer.hpp"
-#include <cstddef> // For NULL, if needed
 
 uintptr_t Serializer::serialize(Data *ptr)
 {
+	// gives a compile error cuase uintptr_t is not a pointer type
+	// return ptr;
 	return reinterpret_cast<uintptr_t>(ptr);
 }
 
