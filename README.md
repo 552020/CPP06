@@ -47,3 +47,22 @@ In JavaScript, a `string` is considered a primitive type. Primitive types in Jav
 This might seem to blur the line between scalar and compound types because a string can hold multiple characters. However, in the context of JavaScript and many other programming languages, strings are still considered scalar or primitive because they are treated as single, immutable values. Even though a string can contain many characters, you interact with it as a whole. You can't change individual characters in the string directly (immutable) without creating a new string.
 
 The key point is that the classification of types as scalar, primitive, or compound can vary slightly between programming languages based on how those types are implemented and manipulated. In JavaScript, `string` is indeed a primitive type because it meets the criteria of being immutable and directly representable at the lowest level of the language, despite it conceptually holding multiple characters.
+
+## std::atoi vs std::strtol
+
+The statement about std::atoi not providing a way to check for errors directly refers to its limited ability to handle
+invalid input or overflow conditions robustly. The function std::atoi converts a string to an int. However, if the input
+string cannot be converted to an integer (for example, if it contains non-numeric characters, or represents a number too
+large for the int type), std::atoi does not offer a built-in mechanism to report these errors. Instead, it simply
+returns 0 for any input that it can't convert due to being non-numeric, and it may produce undefined behavior if the
+number is too large and overflows.
+
+In contrast, functions like std::strtol (or std::strtoll for long long types) provide more detailed error handling
+capabilities:
+
+End Pointer: They take an additional parameter, a pointer to a char (often called endptr), which is set to point to the
+first character after the number in the input string. This allows you to check if the entire string was consumed during
+the conversion or if non-numeric characters were encountered.
+
+Errno: They set the global variable errno to ERANGE in case of overflow or underflow, providing a way to detect when the
+number is out of the representable range for the given numeric type.

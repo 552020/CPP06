@@ -10,7 +10,7 @@ class ScalarConverter
 	static void convert(const std::string &input);
 
   private:
-	ScalarConverter(); // Private constructor to prevent instantiation
+	ScalarConverter();
 };
 
 #endif // SCALARCONVERTER_H
