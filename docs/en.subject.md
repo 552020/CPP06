@@ -161,9 +161,9 @@ Do not forget to turn in the files of your Data structure.
 
 ## Chapter VI
 
-Exercise 02: Identify real type
-Exercise : 02
-Identify real type
+Exercise 02:
+**Identify real type**
+
 Turn-in directory : ex02/
 Files to turn in : Makefile, _.cpp, _.{h, hpp}
 Forbidden functions : std::typeinfo
@@ -171,8 +171,7 @@ Forbidden functions : std::typeinfo
 Implement a Base class that has a public virtual destructor only. Create three empty
 classes A, B and C, that publicly inherit from Base.
 
-These four classes don’t have to be designed in the Orthodox
-Canonical Form.
+These four classes don’t have to be designed in the Orthodox Canonical Form.
 
 Implement the following functions:
 Base _ generate(void);
@@ -185,8 +184,6 @@ It prints the actual type of the object pointed to by p: "A", "B" or "C". Using 
 inside this function is forbidden.
 Including the typeinfo header is forbidden.
 Write a program to test that everything works as expected.
-
-10
 
 Chapter VII
 Submission and peer-evaluation

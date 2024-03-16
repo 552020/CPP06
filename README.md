@@ -50,19 +50,26 @@ The key point is that the classification of types as scalar, primitive, or compo
 
 ## std::atoi vs std::strtol
 
-The statement about std::atoi not providing a way to check for errors directly refers to its limited ability to handle
-invalid input or overflow conditions robustly. The function std::atoi converts a string to an int. However, if the input
-string cannot be converted to an integer (for example, if it contains non-numeric characters, or represents a number too
-large for the int type), std::atoi does not offer a built-in mechanism to report these errors. Instead, it simply
-returns 0 for any input that it can't convert due to being non-numeric, and it may produce undefined behavior if the
-number is too large and overflows.
-
-In contrast, functions like std::strtol (or std::strtoll for long long types) provide more detailed error handling
+**std::strtol** (or std::strtoll for long long types) provide more detailed error handling
 capabilities:
 
-End Pointer: They take an additional parameter, a pointer to a char (often called endptr), which is set to point to the
-first character after the number in the input string. This allows you to check if the entire string was consumed during
-the conversion or if non-numeric characters were encountered.
+- End Pointer: They take an additional parameter, a pointer to a char (often called endptr), which is set to point to the first character after the number in the input string. This allows you to check if the entire string was consumed during the conversion or if non-numeric characters were encountered.
 
-Errno: They set the global variable errno to ERANGE in case of overflow or underflow, providing a way to detect when the
-number is out of the representable range for the given numeric type.
+- Errno: They set the global variable errno to ERANGE in case of overflow or underflow, providing a way to detect when the number is out of the representable range for the given numeric type.
+
+`long int strtol(const char* str, char** endptr, int base);`
+
+strtol takes three parameters:
+
+- _str_: C-string that the function will attempt to convert to a long int.
+
+- _endptr_: Pointer to a char* that strtol will set to point to the character in str immediately following the number. If endptr is not NULL, strtol stores the address of the first invalid character in *endptr.
+- _base_: Numerical base (between 2 and 36) that determines the valid characters and their interpretation. If this is 0, the base is automatically determined based on the start of the string (e.g., "0x" for hex, "0" for octal, and a non-zero digit for decimal).
+
+The statement about std::atoi not providing a way to check for errors directly refers to its limited ability to handle invalid input or overflow conditions robustly. The function std::atoi converts a string to an int. However, if the input string cannot be converted to an integer (for example, if it contains non-numeric characters, or represents a number too
+large for the int type), std::atoi does not offer a built-in mechanism to report these errors. Instead, it simply returns 0 for any input that it can't convert due to being non-numeric, and it may produce undefined behavior if the
+number is too large and overflows.
+
+**errno** is a global variable used by the C standard library (and inherited by C++) to report error conditions for various functions, particularly those related to system calls and some math operations. Functions set errno to specific error codes to indicate what type of error occurred. Before calling a function that may set errno, it's a common practice to reset errno to 0 to ensure you're detecting new errors correctly.
+
+**ERANGE** is an error code indicating that the result of a function call was out of range. In the context of strtol, it means the number represented by the input string is too large (or too small) to fit in a long.
