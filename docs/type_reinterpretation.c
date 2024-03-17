@@ -2,12 +2,14 @@
 
 int main()
 {
+	// We creeate a float
 	float a = 420.42f;
+	// We create a void pointer and we assign the address of the float to it
 	void *b = &a;
+	// We create another void pointer and we assign the address of the float to it
 	void *c = (void *)&a;
 	void *d = &a;
 	int *e = (int *)d; // Corrected with an explicit cast
-	// int *f = (int *)a; // This line is removed because it's incorrect
 
 	printf("&a: %p, a: %f\n", (void *)&a, a); // Printing address of a and its value
 	printf("b: %p\n", b);					  // Printing the void pointer b
