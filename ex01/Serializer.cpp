@@ -2,8 +2,10 @@
 
 uintptr_t Serializer::serialize(Data *ptr)
 {
-	// gives a compile error cuase uintptr_t is not a pointer type
-	// return ptr;
+	// uintptr_t uintptr_tPtr;
+	// error: incompatible pointer to integer conversion assigning to 'uintptr_t' (aka 'unsigned long') from 'Data *'
+	// uintptr_tPtr = ptr;
+	// return uintptr_tPtr;
 	return reinterpret_cast<uintptr_t>(ptr);
 }
 
