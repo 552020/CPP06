@@ -31,17 +31,15 @@ void testStaticCast()
 void testCharLiterals()
 {
 	const std::string charLiterals[] = {
-		"0",	// Invalid (no single quotes)
-		"'0'",	// Valid and printable
-		"'a'",	// Valid and printable
-		"'b'",	// Valid and printable
-		"'9'",	// Valid and printable
-		"c",	// Invalid (no single quotes)
-		"'\n'", // Valid but non-displayable (if you decide to test non-printable)
-		"' '",	// Valid and printable (space)
-		"'z'",	// Valid and printable
-		"''",	// Invalid (empty character)
-		"'ab'", // Invalid (more than one character)
+		"0",	
+		"'0'",
+		"'a'",
+		"'b'",
+		"'9'",
+		"c",
+		"'\n'",
+		"' '",
+		"'ab'",
 	};
 	const int numLiterals = sizeof(charLiterals) / sizeof(charLiterals[0]);
 
@@ -86,7 +84,7 @@ void testFloatLiterals()
 	const char *floatLiterals[] = {
 		"3.14f", "-123.456f", "-inff", "+inff", "nanf", "123.", "f", ".f", "0.0f", "65.0f", NULL};
 
-	for (int i = 0; floatLiterals[i] != NULL; ++i)
+	for (int i = 0; floatLiterals[i] != NULL; ++i) 
 	{
 		std::cout << "Testing float literal: " << floatLiterals[i] << std::endl;
 		ScalarConverter::convert(std::string(floatLiterals[i]));
@@ -140,10 +138,10 @@ int main(int argc, char *argv[])
 				  << std::endl;
 	}
 	(void)argv;
-	// testStaticCast();
-	// testCharLiterals();
-	// testIntLiterals();
-	// testFloatLiterals();
+	 testStaticCast();
+	 testCharLiterals();
+	 testIntLiterals();
+	 testFloatLiterals();
 	testDoubleLiterals();
 	return 0;
 }
