@@ -57,26 +57,29 @@ void identify(Base &p)
 		(void)a;
 		std::cout << "A" << std::endl;
 	}
-	catch (const std::bad_cast &)
+	catch (const std::bad_cast &e)
 	{
 		try
 		{
+			std::cout << "Error for A: " << e.what() << std::endl;
 			B &b = dynamic_cast<B &>(p);
 			(void)b;
 			std::cout << "B" << std::endl;
 		}
-		catch (const std::bad_cast &)
+		catch (const std::bad_cast &e)
 		{
 			try
 			{
+				std::cout << "Error for B: " << e.what() << std::endl;
 				C &c = dynamic_cast<C &>(p);
 				(void)c;
 				std::cout << "C" << std::endl;
 				return;
 			}
-			catch (const std::bad_cast &)
+			catch (const std::bad_cast &e)
 			{
 				std::cout << "This will never happen! But it did!" << std::endl;
+				std::cout << "Error for C: " << e.what() << std::endl;
 				return;
 			}
 		}
