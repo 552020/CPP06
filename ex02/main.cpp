@@ -57,7 +57,7 @@ void identify(Base &p)
 		(void)a;
 		std::cout << "A" << std::endl;
 	}
-	catch (const std::bad_cast &e)
+	catch (const std::exception &e)
 	{
 		try
 		{
@@ -66,7 +66,7 @@ void identify(Base &p)
 			(void)b;
 			std::cout << "B" << std::endl;
 		}
-		catch (const std::bad_cast &e)
+		catch (const std::exception &e)
 		{
 			try
 			{
@@ -76,7 +76,7 @@ void identify(Base &p)
 				std::cout << "C" << std::endl;
 				return;
 			}
-			catch (const std::bad_cast &e)
+			catch (const std::exception &e)
 			{
 				std::cout << "This will never happen! But it did!" << std::endl;
 				std::cout << "Error for C: " << e.what() << std::endl;
