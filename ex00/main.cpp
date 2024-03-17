@@ -86,19 +86,7 @@ void testFloatLiterals()
 	std::cout << "FLT_MAX as double (wiithout setting precisioin): " << std::fixed << static_cast<double>(FLT_MAX)
 			  << std::endl;
 	const char *floatLiterals[] = {
-		"3.14f",	 // Valid
-		"-123.456f", // Valid
-		"1.0e20f",	 // Valid, large number
-		"-inff",	 // Negative infinity
-		"+inff",	 // Positive infinity
-		"nanf",		 // Not a number
-		"123.",		 // Invalid, missing 'f' suffix
-		"f",		 // Invalid, no digits
-		".f",		 // Invalid, no digits before the dot
-		"0.0f",		 // Valid
-		"65.0f",	 // Valid
-		NULL		 // Sentinel value to mark the end of the array
-	};
+		"3.14f", "-123.456f", "-inff", "+inff", "nanf", "123.", "f", ".f", "0.0f", "65.0f", NULL};
 
 	for (int i = 0; floatLiterals[i] != NULL; ++i)
 	{
@@ -127,23 +115,25 @@ void testDoubleLiterals()
 	{
 		std::cout << "Testing double literal: " << doubleLiterals[i] << std::endl;
 		ScalarConverter::convert(doubleLiterals[i]);
-		std::cout << std::endl; // Separate test outputs for readability
+		std::cout << std::endl;
 	}
 }
+// main for testing from the command line
+int main(int argc, char *argv[])
+{
+	if (argc != 2)
+	{
+		std::cerr << "Usage: " << argv[0] << " <literal>\n";
+		return 1;
+	}
 
-// int main(int argc, char *argv[])
-// {
-// 	if (argc != 2)
-// 	{
-// 		std::cerr << "Usage: " << argv[0] << " <literal>\n";
-// 		return 1;
-// 	}
+	ScalarConverter::convert(argv[1]);
 
-// 	ScalarConverter::convert(argv[1]);
+	return 0;
+}
 
-// 	return 0;
-// }
-
+// main for automated testing
+/*
 int main(int argc, char *argv[])
 {
 	if (argc != 1)
@@ -159,3 +149,4 @@ int main(int argc, char *argv[])
 	testDoubleLiterals();
 	return 0;
 }
+*/

@@ -60,16 +60,17 @@ bool isValidChar(int value, ConvertedLiterals &literals)
 {
 	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
 		return false;
-	literals.charIsPrintable = std::isprint(static_cast<unsigned char>(value));
+	char valueAsUnsignedChar = static_cast<unsigned char>(value);
+	literals.charIsPrintable = std::isprint(valueAsUnsignedChar);
 	return true;
 }
 
-bool inputIsValidIntLiteral(const std::string &input, long &doubleStructValue)
+bool inputIsValidIntLiteral(const std::string &input, long &intStructValue)
 {
 	char *end;
 	errno = 0;
 	long value = std::strtol(input.c_str(), &end, 10);
-	doubleStructValue = value;
+	intStructValue = value;
 
 	if (errno == ERANGE || value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min() ||
 		*end != '\0')
