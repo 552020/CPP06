@@ -114,7 +114,7 @@ bool canConvertFloatOrDoubleToInt(double value)
 
 bool inputIsValidDouble(const std::string &input, double &literalStructValue, bool &isPseudo)
 {
-	if (input == "-inf" || input == "-inf" || input == "nan")
+	if (input == "+inf" || input == "-inf" || input == "nan")
 	{
 		isPseudo = true;
 		return true;

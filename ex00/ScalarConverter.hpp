@@ -11,6 +11,9 @@ class ScalarConverter
 
   private:
 	ScalarConverter();
+	ScalarConverter(const ScalarConverter &src);
+	ScalarConverter &operator=(const ScalarConverter &src);
+	~ScalarConverter();
 };
 
-#endif // SCALARCONVERTER_H
+#endif

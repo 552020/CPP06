@@ -4,6 +4,32 @@
 #include <iomanip>
 #include <cfloat> // For FLT_MAX
 
+void testStaticCast()
+{
+
+	int a = 42;
+	std::cout << "a (int): " << a << std::endl;
+
+	// Implicit Promotion
+	double b = a;
+	std::cout << "b (double, implicit cast from a): " << b << std::endl;
+	// Explicit Promotion
+	double c = static_cast<double>(a);
+	std::cout << "c (double, explicit static_cast from a): " << c << std::endl;
+
+	double d = 3.14;
+	b = b + d;
+	std::cout << "b : " << b << std::endl;
+	// Implicit Demotion
+	int e = b;
+	std::cout << "e (int, implicit cast from b): " << e << std::endl;
+
+	// Demotion (Explicit cast)
+	// But there is no difference between the implicit and explicit cast in this case
+	e = static_cast<int>(b);
+	std::cout << "e (int, explicit static_cast from b): " << e << std::endl;
+}
+
 void testCharLiterals()
 {
 	const std::string charLiterals[] = {
@@ -25,7 +51,7 @@ void testCharLiterals()
 	{
 		std::cout << "Testing literal: " << charLiterals[i] << std::endl;
 		ScalarConverter::convert(charLiterals[i]);
-		std::cout << std::endl; // Separate test outputs for readability
+		std::cout << std::endl;
 	}
 }
 
@@ -38,7 +64,7 @@ void testIntLiterals()
 		std::to_string(static_cast<long>(std::numeric_limits<char>::min()) - 1),
 		std::to_string(static_cast<long>(std::numeric_limits<int>::max())),
 		std::to_string(static_cast<long>(std::numeric_limits<int>::min())),
-		std::to_string(0),
+		"'0'",
 		"12345",
 		"-12345",
 	};
@@ -49,7 +75,7 @@ void testIntLiterals()
 	{
 		std::cout << "Testing integer literal: " << intLiterals[i] << std::endl;
 		ScalarConverter::convert(intLiterals[i]);
-		std::cout << std::endl; // Separate test outputs for readability
+		std::cout << std::endl;
 	}
 }
 
@@ -57,7 +83,7 @@ void testFloatLiterals()
 {
 	std::cout << "FLT_MAX as double: " << std::fixed << std::setprecision(10) << static_cast<double>(FLT_MAX)
 			  << std::endl;
-	std::cout << "FLT_MAX as double (wihtou setting precisioin): " << std::fixed << static_cast<double>(FLT_MAX)
+	std::cout << "FLT_MAX as double (wiithout setting precisioin): " << std::fixed << static_cast<double>(FLT_MAX)
 			  << std::endl;
 	const char *floatLiterals[] = {
 		"3.14f",	 // Valid
@@ -78,7 +104,7 @@ void testFloatLiterals()
 	{
 		std::cout << "Testing float literal: " << floatLiterals[i] << std::endl;
 		ScalarConverter::convert(std::string(floatLiterals[i]));
-		std::cout << std::endl; // Separate test outputs for readability
+		std::cout << std::endl;
 	}
 }
 
@@ -89,12 +115,8 @@ void testDoubleLiterals()
 		"-0.0",
 		"123.456",
 		"-123.456",
-		std::to_string(std::numeric_limits<double>::max()),	 // Maximum double
-		std::to_string(-std::numeric_limits<double>::max()), // Minimum double (negative)
-		"1.7976931348623157e+308",							 // Another representation of the maximum double value
-		"-1.7976931348623157e+308",							 // Negative max double value representation
-		"1e309",											 // Beyond maximum double, should result in infinity
-		"-1e309",											 // Beyond minimum double, should result in -infinity
+		std::to_string(std::numeric_limits<double>::max()),
+		std::to_string(-std::numeric_limits<double>::max()),
 		"nan",
 		"+inf",
 		"-inf",
@@ -130,6 +152,7 @@ int main(int argc, char *argv[])
 				  << std::endl;
 	}
 	(void)argv;
+	// testStaticCast();
 	// testCharLiterals();
 	// testIntLiterals();
 	// testFloatLiterals();
