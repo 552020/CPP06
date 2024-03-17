@@ -2,7 +2,7 @@
 
 ## Conversion of scalar types
 
-This exercise is about using _static_cast_
+This exercise is about using **static_cast**.
 
 ## Scalar types
 
