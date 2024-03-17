@@ -8,33 +8,32 @@
 
 // https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
 
-// Generates a random Base pointer to either A, B, or C
 Base *generate(void)
 {
-	// Seed the random number generator
-	// It is only necessary to seed the random number generator once to increase the randomness of the random numbers
 	static bool seeded = false;
 	if (!seeded)
 	{
-		// srand() is used to set the initial seed for the rand() function’s sequence of pseudo-random numbers.
-		std::srand(std::time(0)); // Use current time as seed for random generator
+		std::srand(std::time(0));
 		seeded = true;
 	}
 
-	// Generate a random number between 0 and 2
 	int randNum = std::rand() % 3;
 
-	// Depending on the random number, instantiate A, B, or C
+	std::cout << "Generated instance of ";
 	switch (randNum)
 	{
 	case 0:
+		std::cout << "A!" << std::endl;
 		return new A;
 	case 1:
+		std::cout << "B!" << std::endl;
 		return new B;
 	case 2:
+		std::cout << "C!" << std::endl;
 		return new C;
 	default:
-		return NULL; // This should never happen
+		std::cout << "This should not have happen!" << std::endl;
+		return NULL;
 	}
 }
 
@@ -73,37 +72,26 @@ void identify(Base &p)
 				C &c = dynamic_cast<C &>(p);
 				(void)c;
 				std::cout << "C" << std::endl;
+				return;
 			}
 			catch (const std::bad_cast &)
 			{
+				std::cout << "This will never happen! But it did!" << std::endl;
 				return;
 			}
 		}
 	}
-	std::cout << "This will never happen!" << std::endl;
 }
 
 int main(void)
 {
-	// Generate a random Base pointer
 	Base *base = generate();
 
-	// Identify the type of the Base pointer
-	std::cout << "Identifying the type of the Base pointer:" << std::endl;
-	std::cout << "Base pointer is of type ";
-	if (dynamic_cast<A *>(base))
-		std::cout << "A" << std::endl;
-	else if (dynamic_cast<B *>(base))
-		std::cout << "B" << std::endl;
-	else if (dynamic_cast<C *>(base))
-		std::cout << "C" << std::endl;
-
-	std::cout << "Identifying with the pointer:" << std::endl;
+	std::cout << "\nIdentifying via pointer:" << std::endl;
 	identify(base);
-	std::cout << "Identifying with the reference:" << std::endl;
+	std::cout << "\nIdentifying via reference:" << std::endl;
 	identify(*base);
 
-	// Delete the Base pointer
 	delete base;
 
 	return 0;
