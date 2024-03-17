@@ -1,8 +1,12 @@
 # CPP06
 
-## What is a scalar type
+## Conversion of scalar types
 
-In programming, when we say a scalar type represents a single value, we mean that variables of a scalar type hold one piece of data at a time. This contrasts with compound types, which can hold multiple pieces of data, often of various types, at the same time. Scalar types are the simplest form of data types and serve as the building blocks for more complex data structures.
+This exercise is about using _static_cast_
+
+## Scalar types
+
+A **scalar type** represents a single value, that means tahat variables of a scalar type hold one piece of data at a time. This contrasts with **compound types**, which can hold multiple pieces of data, often of various types, at the same time. Scalar types are the simplest form of data types and serve as the building blocks for more complex data structures.
 
 Scalar types are often considered primitive types. The term "primitive" refers to the basic data types provided by a programming language as built-in types. These are the types that are not built out of other data types but rather serve as the fundamental data types from which more complex types can be constructed.
 
