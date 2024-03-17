@@ -1,12 +1,11 @@
 #include "ScalarConverter.hpp"
-#include <cctype> // for std::isprint
-#include <cfloat> // for FLT_MAX
 
-#include <climits> // for CHAR_MIN and CHAR_MAX
-#include <cstdlib> // for std::strtol
-#include <cerrno>  // for errno
-#include <cmath>   // for std::abs
-#include <iostream>
+
+std::string toString(long value) {
+    std::ostringstream oss;
+    oss << value;
+    return oss.str();
+}
 
 struct ConvertedLiterals
 {
@@ -87,7 +86,7 @@ bool inputIsValidFloat(const std::string &input, float &floatStructValue, bool &
 	}
 	if (input == "f" || input == ".f")
 		return false;
-	if (input.back() != 'f' || input.find('.') == std::string::npos)
+	if (input[input.size() - 1] != 'f' || input.find('.') == std::string::npos)
 		return false;
 	std::string withoutSuffix = input.substr(0, input.size() - 1);
 	errno = 0;
@@ -141,7 +140,7 @@ bool parseCharLiteral(const std::string &input, ConvertedLiterals &literals)
 		isValidChar(static_cast<int>(input[1]), literals);
 		literals.charLiteral = input;
 		literals.intIsValid = true;
-		literals.intLiteral = std::to_string(static_cast<int>(input[1]));
+		literals.intLiteral = toString(static_cast<int>(input[1]));
 		literals.floatIsValid = true;
 		literals.floatLiteral = literals.intLiteral + ".0f";
 		literals.doubleIsValid = true;
@@ -165,7 +164,8 @@ bool parseIntLiteral(const std::string &input, ConvertedLiterals &literals)
 		if (isValidChar(static_cast<int>(literals.intValue), literals))
 		{
 			literals.charIsValid = true;
-			literals.charLiteral = "'" + std::string(1, static_cast<char>(std::stoi(input))) + "'";
+			char intAsChar = static_cast<char>(literals.intValue);
+			literals.charLiteral = "'" + std::string(1, intAsChar) + "'";
 		}
 		printConvertedLiterals(literals);
 		return true;
@@ -184,7 +184,7 @@ bool parseFloatLiteral(const std::string &input, ConvertedLiterals &literals)
 		if (!literals.floatIsPseudo && canConvertFloatOrDoubleToInt(literals.floatValue))
 		{
 			literals.intIsValid = true;
-			literals.intLiteral = std::to_string(static_cast<int>(literals.floatValue));
+			literals.intLiteral = toString(static_cast<int>(literals.floatValue));
 			if (isValidChar(static_cast<int>(literals.floatValue), literals))
 			{
 				literals.charIsValid = true;
@@ -219,7 +219,7 @@ bool parseDoubleLiteral(const std::string &input, ConvertedLiterals &literals)
 			if (canConvertFloatOrDoubleToInt(literals.doubleValue))
 			{
 				literals.intIsValid = true;
-				literals.intLiteral = std::to_string(static_cast<int>(literals.doubleValue));
+				literals.intLiteral = toString(static_cast<int>(literals.doubleValue));
 				if (isValidChar(static_cast<int>(literals.doubleValue), literals))
 				{
 					literals.charIsValid = true;

@@ -1,8 +1,6 @@
 #include "ScalarConverter.hpp"
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <cfloat> // For FLT_MAX
+
+std::string toString(long value);
 
 void testStaticCast()
 {
@@ -58,12 +56,12 @@ void testCharLiterals()
 void testIntLiterals()
 {
 	const std::string intLiterals[] = {
-		std::to_string(static_cast<long>(std::numeric_limits<int>::max()) + 1),
-		std::to_string(static_cast<long>(std::numeric_limits<int>::min()) - 1),
-		std::to_string(static_cast<long>(std::numeric_limits<char>::max()) + 1),
-		std::to_string(static_cast<long>(std::numeric_limits<char>::min()) - 1),
-		std::to_string(static_cast<long>(std::numeric_limits<int>::max())),
-		std::to_string(static_cast<long>(std::numeric_limits<int>::min())),
+		toString(static_cast<long>(std::numeric_limits<int>::max()) + 1),
+		toString(static_cast<long>(std::numeric_limits<int>::min()) - 1),
+		toString(static_cast<long>(std::numeric_limits<char>::max()) + 1),
+		toString(static_cast<long>(std::numeric_limits<char>::min()) - 1),
+		toString(static_cast<long>(std::numeric_limits<int>::max())),
+		toString(static_cast<long>(std::numeric_limits<int>::min())),
 		"'0'",
 		"12345",
 		"-12345",
@@ -103,8 +101,8 @@ void testDoubleLiterals()
 		"-0.0",
 		"123.456",
 		"-123.456",
-		std::to_string(std::numeric_limits<double>::max()),
-		std::to_string(-std::numeric_limits<double>::max()),
+		toString(std::numeric_limits<double>::max()),
+		toString(-std::numeric_limits<double>::max()),
 		"nan",
 		"+inf",
 		"-inf",
